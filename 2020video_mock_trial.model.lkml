@@ -31,4 +31,10 @@ explore: rental {
     sql_on: ${rental.rental_id} = ${payment.rental_id} ;;
     type: inner
   }
+
+  join: film{
+    relationship: many_to_one
+    sql_on: ${inventory.film_id}=${film.film_id} ;;
+    type: left_outer
+  }
 }
