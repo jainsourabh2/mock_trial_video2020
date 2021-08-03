@@ -9,8 +9,9 @@ view: payment {
   }
 
   dimension: amount {
+    hidden: yes
     type: number
-    sql: ${TABLE}.amount ;;
+    sql: ${TABLE}.amount;;
   }
 
   dimension: customer_id {
@@ -60,5 +61,11 @@ view: payment {
   measure: count {
     type: count
     drill_fields: [payment_id, rental.rental_id]
+  }
+
+  measure: total_payment {
+    type: sum
+    sql: ${amount} ;;
+#    value_format: "USD"
   }
 }

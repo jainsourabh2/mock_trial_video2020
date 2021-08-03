@@ -70,4 +70,24 @@ view: rental {
     type: count
     drill_fields: [rental_id, inventory.inventory_id, payment.count]
   }
+
+
+  dimension: delayed_rental {
+    hidden: yes
+    type: number
+    sql: datediff(IFNULL(${return_date},CURDATE()),${rental_date}) ;;
+  }
+
+  dimension: late_rental_hidden {
+    hidden: yes
+    type: yesno
+    sql: ${delayed_rental} > 7  ;;
+  }
+
+  measure: late_rental  {
+    type: count
+    filters: [late_rental_hidden: "Yes"]
+    drill_fields: [rental_id, rental_date,return_date]
+  }
+
 }
