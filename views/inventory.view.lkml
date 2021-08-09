@@ -37,4 +37,8 @@ view: inventory {
     type: count
     drill_fields: [inventory_id, film.film_id, rental.count]
   }
+
+  measure: total_inventory {
+    type: count
+  }
 }

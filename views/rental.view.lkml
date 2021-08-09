@@ -90,4 +90,9 @@ view: rental {
     drill_fields: [rental_id, rental_date,return_date]
   }
 
+  measure: rented_inventory {
+    type: count
+    filters: [return_date: "NULL"]
+  }
+
 }

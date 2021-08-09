@@ -66,6 +66,6 @@ view: payment {
   measure: total_payment {
     type: sum
     sql: ${amount} ;;
-#    value_format: "USD"
+    value_format_name: usd
   }
 }
