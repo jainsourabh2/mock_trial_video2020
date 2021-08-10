@@ -76,6 +76,12 @@ explore: rental {
     type: left_outer
   }
 
+  join: customer {
+    relationship: many_to_one
+    sql_on: ${rental.customer_id}=${customer.customer_id} ;;
+    type: left_outer
+  }
+
   join: category {
     relationship: many_to_one
     sql_on: ${film_category.category_id}=${category.category_id} ;;

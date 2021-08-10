@@ -75,11 +75,11 @@ view: customer_360 {
     sql: ${total_payments} ;;
   }
 
-  dimension_group: rental_cohort {
-    type: duration
-    sql_start: ${first_rental_date_date} ;;
-    sql_end: ${last_rental_date_date} ;;
-  }
+  # dimension_group: rental_cohort {
+  #   type: duration
+  #   sql_start: ${signup_date_date} ;;
+  #   sql_end: ${rental.rental_date} ;;
+  # }
 
   measure: customer_count {
     type: count
