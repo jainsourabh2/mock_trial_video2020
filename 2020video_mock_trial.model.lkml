@@ -19,6 +19,17 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 #   }
 # }
 
+##### Configuration #####
+datagroup: inventory_dg {
+  sql_trigger: SELECT MAX(last_update) FROM  inventory;;
+  max_cache_age: "1 hours"
+  label: "New inventory data fetched"
+  description: "Data group to pick latest inventory"
+}
+
+persist_with: inventory_dg
+
+
 explore: rental {
   join: inventory {
     relationship: many_to_one
@@ -35,6 +46,24 @@ explore: rental {
   join: film{
     relationship: many_to_one
     sql_on: ${inventory.film_id}=${film.film_id} ;;
+    type: left_outer
+  }
+
+  join: rental_inventory {
+    relationship: many_to_one
+    sql_on: ${inventory.film_id}=${rental_inventory.film_id} ;;
+    type: inner
+  }
+
+  join: film_category {
+    relationship: many_to_one
+    sql_on: ${inventory.film_id}=${film_category.film_id} ;;
+    type: left_outer
+  }
+
+  join: category {
+    relationship: many_to_one
+    sql_on: ${film_category.category_id}=${category.category_id} ;;
     type: left_outer
   }
 }
