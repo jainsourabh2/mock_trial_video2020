@@ -4,6 +4,7 @@ view: customer_360 {
                 ,first_name
                 ,last_name
                 ,email
+                ,create_date
                 ,MIN(rental_date) AS first_rental_date
                 ,MAX(rental_date) AS last_rental_date
                 ,COUNT(DISTINCT rental.rental_id) AS total_rentals
@@ -13,7 +14,9 @@ view: customer_360 {
           LEFT JOIN payment ON customer.customer_id = payment.customer_id
           GROUP BY customer.customer_id
                 ,first_name
-                ,last_name,email ;;
+                ,last_name
+                ,email
+                ,create_date ;;
 
     datagroup_trigger: customer360_dg
     indexes: ["customer_id"]
@@ -24,6 +27,11 @@ view: customer_360 {
     hidden: yes
     type: number
     sql: ${TABLE}.customer_id ;;
+  }
+
+  dimension_group: signup_date {
+    type: time
+    sql: ${TABLE}.create_date ;;
   }
 
   dimension: first_name {
@@ -71,5 +79,9 @@ view: customer_360 {
     type: duration
     sql_start: ${first_rental_date_date} ;;
     sql_end: ${last_rental_date_date} ;;
+  }
+
+  measure: customer_count {
+    type: count
   }
 }
