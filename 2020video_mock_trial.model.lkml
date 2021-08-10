@@ -29,6 +29,15 @@ datagroup: inventory_dg {
 
 persist_with: inventory_dg
 
+datagroup: customer360_dg {
+  sql_trigger: SELECT MAX(customer_id) FROM  customer;;
+  max_cache_age: "1 hours"
+  label: "Fetch new customers"
+  description: "Data group to pick new customers"
+}
+
+persist_with: customer360_dg
+
 
 explore: rental {
   join: inventory {

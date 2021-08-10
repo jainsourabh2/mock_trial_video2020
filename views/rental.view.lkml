@@ -78,6 +78,11 @@ view: rental {
     sql: datediff(IFNULL(${return_date},CURDATE()),${rental_date}) ;;
   }
 
+  dimension: rental_duration {
+    type: number
+    sql: datediff(${return_date},${rental_date}) ;;
+  }
+
   dimension: late_rental_hidden {
     hidden: yes
     type: yesno
