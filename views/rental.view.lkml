@@ -101,10 +101,10 @@ view: rental {
     drill_fields: [rental_id,rental_date]
   }
 
-  # dimension_group: return_rental {
-  #   type: duration
-  #   sql_start: ${customer.created_raw} ;;
-  #   sql_end: ${rental_date} ;;
-  # }
+  dimension_group: return_rental {
+    type: duration
+    sql_start: ${customer.create_raw} ;;
+    sql_end: ${rental_date} ;;
+  }
 
 }
