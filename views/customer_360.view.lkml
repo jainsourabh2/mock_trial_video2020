@@ -56,8 +56,8 @@ view: customer_360 {
     sql: ${TABLE}.total_rentals ;;
   }
 
-  measure: total_payments {
-    type: sum
+  dimension: total_payments {
+    type: number
     sql: ${TABLE}.total_payments;;
   }
 
@@ -65,5 +65,11 @@ view: customer_360 {
     type: tier
     tiers: [100,200,300,400,500,600,700,800,900,1000]
     sql: ${total_payments} ;;
+  }
+
+  dimension_group: rental_cohort {
+    type: duration
+    sql_start: ${first_rental_date_date} ;;
+    sql_end: ${last_rental_date_date} ;;
   }
 }
