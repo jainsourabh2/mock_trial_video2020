@@ -103,7 +103,7 @@ view: rental {
 
   dimension_group: return_rental {
     type: duration
-    sql_start: ${customer.create_raw} ;;
+    sql_start: ${customer_360.first_rental_date_raw} ;;
     sql_end: ${rental_date} ;;
   }
 

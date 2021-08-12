@@ -4,7 +4,6 @@ view: customer_360 {
                 ,first_name
                 ,last_name
                 ,email
-                ,create_date
                 ,MIN(rental_date) AS first_rental_date
                 ,MAX(rental_date) AS last_rental_date
                 ,COUNT(DISTINCT rental.rental_id) AS total_rentals
@@ -15,8 +14,7 @@ view: customer_360 {
           GROUP BY customer.customer_id
                 ,first_name
                 ,last_name
-                ,email
-                ,create_date ;;
+                ,email ;;
 
     datagroup_trigger: customer360_dg
     indexes: ["customer_id"]
@@ -83,5 +81,6 @@ view: customer_360 {
 
   measure: customer_count {
     type: count
+    drill_fields: [customer_id,first_name,last_name,email,first_rental_date_date,last_rental_date_date]
   }
 }
