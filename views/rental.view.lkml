@@ -101,6 +101,12 @@ view: rental {
     drill_fields: [rental_id,rental_date]
   }
 
+  measure: returned_rentals {
+    type: count
+    filters: [return_date: "-NULL"]
+    drill_fields: [rental_id,rental_date]
+  }
+
   dimension_group: return_rental {
     type: duration
     sql_start: ${customer_360.first_rental_date_raw} ;;
