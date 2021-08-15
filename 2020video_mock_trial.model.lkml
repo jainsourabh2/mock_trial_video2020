@@ -78,7 +78,7 @@ explore: rental {
 
   join: customer {
     relationship: many_to_one
-    sql_on: ${rental.customer_id}=${customer.customer_id} ;;
+    sql_on: ${customer.customer_id} = ${rental.customer_id} ;;
     type: left_outer
   }
 

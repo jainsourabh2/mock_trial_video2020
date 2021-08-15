@@ -1,11 +1,11 @@
-view: customer {
-  sql_table_name: sakila.customer ;;
-  drill_fields: [customer_id]
+view: staff {
+  sql_table_name: sakila.staff ;;
+  drill_fields: [staff_id]
 
-  dimension: customer_id {
+  dimension: staff_id {
     primary_key: yes
-    type: number
-    sql: ${TABLE}.customer_id ;;
+    type: yesno
+    sql: ${TABLE}.staff_id ;;
   }
 
   dimension: active {
@@ -16,20 +16,6 @@ view: customer {
   dimension: address_id {
     type: number
     sql: ${TABLE}.address_id ;;
-  }
-
-  dimension_group: create {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.create_date ;;
   }
 
   dimension: email {
@@ -61,23 +47,28 @@ view: customer {
     sql: ${TABLE}.last_update ;;
   }
 
+  dimension: password {
+    type: string
+    sql: ${TABLE}.password ;;
+  }
+
+  dimension: picture {
+    type: string
+    sql: ${TABLE}.picture ;;
+  }
+
   dimension: store_id {
     type: yesno
     sql: ${TABLE}.store_id ;;
   }
 
-  measure: total_users {
-    type: count
-    drill_fields: [customer_id, first_name, last_name]
+  dimension: username {
+    type: string
+    sql: ${TABLE}.username ;;
   }
 
-  measure: active_users {
+  measure: count {
     type: count
-    filters: [active: "TRUE"]
-  }
-
-  measure: inactive_users {
-    type: count
-    filters: [active: "FALSE"]
+    drill_fields: [staff_id, first_name, last_name, username]
   }
 }

@@ -86,7 +86,7 @@ view: film {
     sql: ${TABLE}.title ;;
   }
 
-  measure: count {
+  measure: total_films {
     type: count
     drill_fields: [film_id, film_category.count, inventory.count]
   }
