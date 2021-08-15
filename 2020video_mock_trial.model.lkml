@@ -66,6 +66,12 @@ explore: rental {
     type: left_outer
   }
 
+  join: store {
+    relationship: many_to_one
+    sql: ${inventory.store_id}=${store.store_id} ;;
+    type: left_outer
+  }
+
   join: payment {
     relationship: one_to_one
     sql_on: ${rental.rental_id} = ${payment.rental_id} ;;
