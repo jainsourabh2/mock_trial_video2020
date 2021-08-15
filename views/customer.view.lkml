@@ -72,8 +72,9 @@ view: customer {
   }
 
   measure: active_users {
-    type: count
+    type: sum
     filters: [active: "TRUE"]
+    sql: CASE WHEN ${active}='TRUE' THEN 1 ELSE 0 END ;;
   }
 
   measure: inactive_users {
