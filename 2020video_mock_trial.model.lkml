@@ -39,6 +39,7 @@ datagroup: customer360_dg {
 persist_with: customer360_dg
 
 explore: customer {
+  hidden: yes
   join: address {
     relationship: one_to_one
     sql_on: ${customer.address_id}=${address.address_id} ;;
@@ -77,6 +78,12 @@ explore: rental {
     type: left_outer
   }
 
+  join: language{
+    relationship: many_to_one
+    sql_on: ${film.language_id}=${language.language_id} ;;
+    type: left_outer
+  }
+
   join: rental_inventory {
     relationship: many_to_one
     sql_on: ${inventory.film_id}=${rental_inventory.film_id} ;;
@@ -98,6 +105,24 @@ explore: rental {
   join: customer {
     relationship: many_to_one
     sql_on: ${customer.customer_id} = ${rental.customer_id} ;;
+    type: left_outer
+  }
+
+  join: address {
+    relationship: one_to_one
+    sql_on: ${customer.address_id}=${address.address_id} ;;
+    type: inner
+  }
+
+  join: city {
+    relationship: many_to_one
+    sql_on: ${address.city_id}= ${city.city_id} ;;
+    type: left_outer
+  }
+
+  join: country {
+    relationship: many_to_one
+    sql_on: ${city.country_id}=${country.country_id} ;;
     type: left_outer
   }
 

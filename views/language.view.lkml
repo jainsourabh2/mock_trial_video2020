@@ -27,7 +27,7 @@ view: language {
     sql: ${TABLE}.name ;;
   }
 
-  measure: count {
+  measure: total_languages {
     type: count
     drill_fields: [language_id, name]
   }

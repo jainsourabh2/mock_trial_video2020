@@ -66,6 +66,7 @@ view: payment {
   measure: total_payment {
     type: sum
     sql: ${amount} ;;
-    value_format_name: usd
+    #value_format_name: usd
+    value_format: "0.00,\" K\""
   }
 }
