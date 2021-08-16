@@ -29,7 +29,7 @@ view: inventory {
   }
 
   dimension: store_id {
-    type: yesno
+    type: number
     sql: ${TABLE}.store_id ;;
   }
 

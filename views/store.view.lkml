@@ -4,7 +4,7 @@ view: store {
 
   dimension: store_id {
     primary_key: yes
-    type: yesno
+    type: number
     sql: ${TABLE}.store_id ;;
   }
 

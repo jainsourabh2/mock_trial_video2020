@@ -57,14 +57,21 @@ view: customer_360 {
     sql: ${TABLE}.last_rental_date ;;
   }
 
-  measure: total_rentals {
-    type: sum
+  dimension: total_rentals {
+    type: number
     sql: ${TABLE}.total_rentals ;;
   }
 
   dimension: total_payments {
     type: number
     sql: ${TABLE}.total_payments;;
+  }
+
+  dimension: rentals_tier {
+    type: tier
+    style: integer
+    tiers: [5,10,15,20,25,30,35,40,45,50]
+    sql: ${total_rentals} ;;
   }
 
   dimension: payment_tier {
