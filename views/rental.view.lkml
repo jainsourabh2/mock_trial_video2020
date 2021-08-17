@@ -107,10 +107,54 @@ view: rental {
     drill_fields: [rental_id,rental_date]
   }
 
+  measure: average_rental_duration {
+    type: average
+    sql: ${rental_duration} ;;
+  }
+
   dimension_group: return_rental {
     type: duration
     sql_start: ${customer_360.first_rental_date_raw} ;;
     sql_end: ${rental_date} ;;
+  }
+
+
+  dimension: days_until_2nd_rental {
+    view_label: "Repeat Rental"
+    type: number
+    sql: DATEDIFF(${repeat_rentals.rental_date_after1_rental_raw}, ${rental_date}) ;;
+  }
+
+  dimension: days_until_3nd_rental {
+    view_label: "Repeat Rental"
+    type: number
+    sql: DATEDIFF(${repeat_rentals.rental_date_after2_rental_raw}, ${rental_date}) ;;
+  }
+
+
+  dimension: 2nd_rental_30d {
+    label: "Has Repeat Rental Within 30d"
+    type: yesno
+    view_label: "Repeat Rental"
+    sql: ${days_until_2nd_rental} <= 30 ;;
+  }
+
+  measure: 2nd_rental_within_30d {
+    type: count_distinct
+    sql: ${rental_id} ;;
+    view_label: "Repeat Rental"
+
+    filters: {
+      field: 2nd_rental_30d
+      value: "Yes"
+    }
+  }
+
+  measure: repeat_rental_rate {
+    view_label: "Repeat Rental"
+    type: number
+    value_format_name: percent_1
+    sql: ${2nd_rental_within_30d} / ${count}  ;;
   }
 
 }

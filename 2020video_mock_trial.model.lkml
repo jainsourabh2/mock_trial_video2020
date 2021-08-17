@@ -36,6 +36,12 @@ datagroup: customer360_dg {
   description: "Data group to pick new customers"
 }
 
+datagroup: repeat_rentals_dg {
+  sql_trigger: SELECT NOW() FROM  rental;;
+  label: "Generate Repeat Rentals"
+  description: "Data group to generate repeat rentals"
+}
+
 persist_with: customer360_dg
 
 explore: customer {
@@ -60,6 +66,12 @@ explore: customer {
 }
 
 explore: rental {
+  join: repeat_rentals {
+    relationship: one_to_one
+    sql_on: ${rental.rental_id} = ${repeat_rentals.rental_id} ;;
+    type: inner
+  }
+
   join: inventory {
     relationship: many_to_one
     sql_on: ${rental.inventory_id} = ${inventory.inventory_id} ;;
@@ -90,11 +102,11 @@ explore: rental {
     type: left_outer
   }
 
-  join: rental_inventory {
-    relationship: many_to_one
-    sql_on: ${inventory.film_id}=${rental_inventory.film_id} ;;
-    type: inner
-  }
+  # join: rental_inventory {
+  #   relationship: many_to_one
+  #   sql_on: ${inventory.film_id}=${rental_inventory.film_id} ;;
+  #   type: inner
+  # }
 
   join: film_category {
     relationship: many_to_one

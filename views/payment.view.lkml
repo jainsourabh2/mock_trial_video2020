@@ -58,6 +58,11 @@ view: payment {
     sql: ${TABLE}.staff_id ;;
   }
 
+  dimension: months_since_signup {
+    type: number
+    sql: TIMESTAMPDIFF(month, customer_360.first_rental_date, ${payment_date})  ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [payment_id, rental.rental_id]
@@ -68,5 +73,10 @@ view: payment {
     sql: ${amount} ;;
     #value_format_name: usd
     value_format: "0.00,\" K\""
+  }
+
+  measure: unique_users {
+    type: count_distinct
+    sql: ${customer_id} ;;
   }
 }
