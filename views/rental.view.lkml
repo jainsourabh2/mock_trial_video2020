@@ -112,11 +112,11 @@ view: rental {
     sql: ${rental_duration} ;;
   }
 
-  dimension_group: return_rental {
-    type: duration
-    sql_start: ${customer_360.first_rental_date_raw} ;;
-    sql_end: ${rental_date} ;;
-  }
+  # dimension_group: return_rental {
+  #   type: duration
+  #   sql_start: ${customer_360.first_rental_date_raw} ;;
+  #   sql_end: ${rental_date} ;;
+  # }
 
 
   dimension: days_until_2nd_rental {
@@ -125,11 +125,11 @@ view: rental {
     sql: DATEDIFF(${repeat_rentals.rental_date_after1_rental_raw}, ${rental_date}) ;;
   }
 
-  dimension: days_until_3nd_rental {
-    view_label: "Repeat Rental"
-    type: number
-    sql: DATEDIFF(${repeat_rentals.rental_date_after2_rental_raw}, ${rental_date}) ;;
-  }
+  # dimension: days_until_3nd_rental {
+  #   view_label: "Repeat Rental"
+  #   type: number
+  #   sql: DATEDIFF(${repeat_rentals.rental_date_after2_rental_raw}, ${rental_date}) ;;
+  # }
 
 
   dimension: 2nd_rental_30d {
