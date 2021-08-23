@@ -44,26 +44,26 @@ datagroup: repeat_rentals_dg {
 
 persist_with: customer360_dg
 
-explore: customer {
-  hidden: yes
-  join: address {
-    relationship: one_to_one
-    sql_on: ${customer.address_id}=${address.address_id} ;;
-    type: inner
-  }
+# explore: customer {
+#   hidden: yes
+#   join: address {
+#     relationship: one_to_one
+#     sql_on: ${customer.address_id}=${address.address_id} ;;
+#     type: inner
+#   }
 
-  join: city {
-    relationship: many_to_one
-    sql_on: ${address.city_id}= ${city.city_id} ;;
-    type: left_outer
-  }
+#   join: city {
+#     relationship: many_to_one
+#     sql_on: ${address.city_id}= ${city.city_id} ;;
+#     type: left_outer
+#   }
 
-  join: country {
-    relationship: many_to_one
-    sql_on: ${city.country_id}=${country.country_id} ;;
-    type: left_outer
-  }
-}
+#   join: country {
+#     relationship: many_to_one
+#     sql_on: ${city.country_id}=${country.country_id} ;;
+#     type: left_outer
+#   }
+# }
 
 explore: rental {
   join: repeat_rentals {
@@ -81,7 +81,7 @@ explore: rental {
   join: store {
     relationship: many_to_one
     sql: ${inventory.store_id}=${store.store_id} ;;
-    type: left_outer
+    type: inner
   }
 
   join: payment {

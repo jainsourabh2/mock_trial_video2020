@@ -75,8 +75,20 @@ view: payment {
     value_format: "0.00,\" K\""
   }
 
+  measure: average_revenue_per_rental {
+    type: average
+    sql: ${amount} ;;
+    value_format_name: usd
+  }
+
   measure: unique_users {
     type: count_distinct
     sql: ${customer_id} ;;
+  }
+
+  measure: average_revenue_per_user {
+    type: number
+    sql: ${total_payment}/${unique_users} ;;
+    value_format_name: usd
   }
 }

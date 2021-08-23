@@ -31,6 +31,10 @@ view: inventory {
   dimension: store_id {
     type: number
     sql: ${TABLE}.store_id ;;
+    link: {
+      label: "Store Dashboard for Operations"
+      url: "https://emcedev.cloud.looker.com/dashboards-next/54?Store_ID={{ filterable_value | url_encode }}"
+    }
   }
 
   measure: count {
