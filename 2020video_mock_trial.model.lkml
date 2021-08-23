@@ -37,7 +37,7 @@ datagroup: customer360_dg {
 }
 
 datagroup: repeat_rentals_dg {
-  sql_trigger: SELECT NOW() FROM  rental;;
+  sql_trigger: SELECT MAX(rental_id) FROM  rental;;
   label: "Generate Repeat Rentals"
   description: "Data group to generate repeat rentals"
 }

@@ -157,4 +157,10 @@ view: rental {
     sql: ${2nd_rental_within_30d} / ${count}  ;;
   }
 
+
+  dimension: date_difference {
+    type: number
+    sql: TIMESTAMPDIFF(month,${customer_360.first_rental_date_date},${rental.rental_date}) ;;
+  }
+
 }
