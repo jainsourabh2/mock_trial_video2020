@@ -68,16 +68,18 @@ view: customer {
 
   measure: total_users {
     type: count
-    drill_fields: [customer_id, first_name, last_name]
+    drill_fields: [customer_id, first_name, last_name, email]
   }
 
   measure: active_users {
     type: count
     filters: [active: "Yes"]
+    drill_fields: [customer_id, first_name, last_name, email]
   }
 
   measure: inactive_users {
     type: count
     filters: [active: "No"]
+    drill_fields: [customer_id, first_name, last_name, email]
   }
 }

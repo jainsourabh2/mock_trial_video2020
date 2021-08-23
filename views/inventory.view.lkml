@@ -33,7 +33,7 @@ view: inventory {
     sql: ${TABLE}.store_id ;;
     link: {
       label: "Store Dashboard for Operations"
-      url: "https://emcedev.cloud.looker.com/dashboards-next/54?Store_ID={{ filterable_value | url_encode }}"
+      url: "https://emcedev.cloud.looker.com/dashboards-next/54?Store%20ID={{ filterable_value | url_encode }}"
     }
   }
 
