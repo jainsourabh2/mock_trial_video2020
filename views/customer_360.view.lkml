@@ -86,6 +86,11 @@ view: customer_360 {
   #   sql_end: ${rental.rental_date} ;;
   # }
 
+  dimension: recency {
+    type: number
+    sql: datediff(CURDATE(),${last_rental_date_date}) ;;
+  }
+
   measure: customer_count {
     type: count
     drill_fields: [customer_id,first_name,last_name,email,first_rental_date_date,last_rental_date_date]
