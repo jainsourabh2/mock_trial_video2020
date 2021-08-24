@@ -19,7 +19,7 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 #   }
 # }
 
-##### Configuration #####
+##### Configuration ####
 datagroup: inventory_dg {
   sql_trigger: SELECT MAX(last_update) FROM  inventory;;
   max_cache_age: "1 hours"
@@ -27,7 +27,7 @@ datagroup: inventory_dg {
   description: "Data group to pick latest inventory"
 }
 
-persist_with: inventory_dg
+#persist_with: inventory_dg
 
 datagroup: customer360_dg {
   sql_trigger: SELECT MAX(customer_id) FROM  customer;;
@@ -36,13 +36,14 @@ datagroup: customer360_dg {
   description: "Data group to pick new customers"
 }
 
+persist_with: customer360_dg
+
 datagroup: repeat_rentals_dg {
   sql_trigger: SELECT MAX(rental_id) FROM  rental;;
   label: "Generate Repeat Rentals"
   description: "Data group to generate repeat rentals"
 }
 
-persist_with: customer360_dg
 
 # explore: customer {
 #   hidden: yes

@@ -47,33 +47,25 @@ view: repeat_rentals {
     sql: ${TABLE}.next_rental_date_after1 ;;
   }
 
-  # dimension: rental_id_after2_rental {
-  #   type: number
-  #   hidden:  yes
-  #   sql: ${TABLE}.next_rental_id_after2 ;;
-  # }
-
-  # dimension_group: rental_date_after2_rental {
-  #   type: time
-  #   timeframes: [raw, date]
-  #   hidden: yes
-  #   sql: ${TABLE}.next_rental_date_after2 ;;
-  # }
-
   dimension: has_repeat_rental_after1 {
     type: yesno
     sql: ${rental_id_after1_rental} > 0 ;;
   }
 
-  # dimension: has_repeat_rental_after2 {
-  #   type: yesno
-  #   sql: ${rental_id_after1_rental} > 0 ;;
-  # }
-
   dimension: customer_id{
     hidden: yes
     type: number
     sql: ${TABLE}.customer_id ;;
+  }
+
+  dimension: rental_day_difference {
+    type: number
+    sql: datediff(${rental_date_after1_rental_date},${rental_date_date}) ;;
+  }
+
+  measure: average_rental_days_difference {
+    type: average
+    sql: ${rental_day_difference} ;;
   }
 
   set: detail {
